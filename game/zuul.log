@@ -1,0 +1,35 @@
+Command@13649a51
+Command@177c8a63
+Command@6044e08f
+Command@647b785f
+Command@2179eab4
+Command@adf0d0
+Command@74fe41a9
+go west
+go east
+take rock
+take wood
+take cookie
+eat cookie
+drop wood
+quit null
+go west
+go east
+take wood
+take cookie
+eat cookie
+take rock
+drop rock
+quit null
+go left
+go east
+go west
+go south
+take amuletOfWisdom
+drop amuletOfWisdom
+take amuletOfWisdom
+go east
+go west
+go north
+drop amuletOfWisdom
+quit null
