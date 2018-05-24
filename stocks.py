@@ -14,6 +14,7 @@ class stocks():
         self.data = []
         self.changes = []
 
+    # Method checks if input is a number
     def is_number(self, s):
         try:
             float(s)
@@ -51,6 +52,7 @@ class stocks():
         for label in self.testResult:
             wr.writerow([label])
 
+    # Method takes a large number and puts , between the thousands and makes a large number readable
     def stringify(self, x):
         string = ''
         while x >= 1000:
@@ -66,6 +68,7 @@ class stocks():
             x = math.floor(x/1000)
         return str(x) + string
 
+    # Calculates the return you would get between stocks and other cash
     def calculate_intrest(self, principal, year, percent, general_yield):
         x = 2017 - year
         percent = percent/100
@@ -85,6 +88,7 @@ class stocks():
             x = x - 1
         return math.floor(principal)
 
+    # This method calculates the return you would get with 25% taxes
     def calculate_intrest_with_tax(self, principal, year, percent, general_yield):
         x = 2017 - year
         percent = percent/100
@@ -109,6 +113,8 @@ class stocks():
             x = x - 1
         return math.floor(principal)
 
+
+    # This method calculates the return you would get with 35% taxes
     def calculate_random_interest_with_tax(self, principal, year, percent, general_yield):
         x = 2017 - year
         percent = percent/100
@@ -134,16 +140,19 @@ class stocks():
             x = x - 1
         return math.floor(principal)
 
+    # This method calculates the total return
     def total_return(self, starting_cash, final_cash):
         increase = final_cash / starting_cash
         return math.floor(increase)
 
+    # This method calculates the annual return
     def annual_return(self, starting_cash, final_cash, years):
         increase = final_cash/starting_cash
         log_increase = math.log2(increase)
         log_x = log_increase/years
         return math.floor((math.pow(2,log_x) - 1) * 10000)/100
 
+    # This method calculates the money you have after inflation
     def inflation_adjusted(self, cash, years):
         x = years
         inflation = .968
@@ -152,20 +161,22 @@ class stocks():
             x = x - 1
         return math.floor(cash)
 
+    # This method calculates the amount of years you were positive
     def positive_years(self):
-        self.getData(6)
+        self.data
         count = 0
         x = 0
         while x < len(self.data):
-            if self.data[x] > 6:
+            if self.data[x] > 1:
                 count = count + 1
             x = x + 1
 
         print()
         print(str(math.floor(count/x * 10000)/100) + " percent of the years, you return a positive return")
 
+    # This method calculates the amount of straight years you were negative
     def straight_negative(self):
-        self.getData(2)
+        self.data
         count = 0
         x = 0
         max = 0
@@ -180,9 +191,10 @@ class stocks():
         print()
         print(str(max) + " years straight of a negative return")
 
+    # This method calculates the median return if done 100 times
     def median_hundred(self):
         x = 100
-        self.getData(6)
+        self.getData(2)
         percent_in_stocks = 12
         general_yield = 2
         starting_cash = 40000
@@ -203,6 +215,7 @@ class stocks():
                        sum_compounded_money, sum_total_return, sum_annual_return, years)
         return sum_annual_return
 
+    # This method calculates the median return if done 10,000 times
     def median_10k(self):
         x = 1000
         sum = 0
@@ -214,6 +227,7 @@ class stocks():
         print('Median Annual return: ' + str(sum) + ' percent')
 
 
+    # This method takes an option and shows you all the data if you used it every year
     def all(self):
         self.getData(3)
         starting_cash = 40000
@@ -228,6 +242,7 @@ class stocks():
         self.print_all(percent_in_stocks, general_yield, starting_cash,
                        compounded_money, total_return, annual_return, years)
 
+    # This method prints out all your data nicely
     def print_all(self, percent_in_stocks, general_yield, starting_cash,
                   compounded_money, total_return, annual_return, years):
         print('Portfolio with ' + str(percent_in_stocks)
@@ -240,12 +255,13 @@ class stocks():
         print('Max gain in one year: ' + str(self.max_gain) + ' percent')
         print('Max loss in one year: ' + str(self.max_loss) + ' percent')
 
+# Main method
 if __name__ == '__main__':
     stockFile = '/home/shalom/Desktop/Levereging_Stocks.csv'
     outFile = '/home/shalom/Desktop/out.csv'
     s = stocks(stockFile, outFile)
-    #s.straight_negative()
+    s.all()
+    s.straight_negative()
     s.positive_years()
-    #s.all()
     #s.median_10k()
     #s.median_hundred()
